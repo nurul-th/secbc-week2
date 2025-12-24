@@ -19,7 +19,7 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         $validated = $request -> validate([
-        'name' => 'required|string|max: 255',
+        'name' => 'required|string|max:255',
         'description' => 'nullable|string',
         'price' => 'required|numeric',
         'stock' => 'integer',
@@ -60,9 +60,19 @@ class ProductsController extends Controller
     }
 
     // Remove the specified resource from storage.
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        $product -> delete();
-        return response() -> json(null, 204);
+        $product=Product::find($id);
+
+        if(!$product)
+        {
+            return response()->json([
+                'message' => 'Product Not Found'
+            ], 404); 
+        }
+
+        $product->delete();
+
+        return response()->json(null, 204);
     }
 }
