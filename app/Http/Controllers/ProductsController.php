@@ -20,7 +20,7 @@ class ProductsController extends Controller
     {
         $validated = $request -> validate([
         'name' => 'required|string|max: 255',
-        'description' => 'nullable|text',
+        'description' => 'nullable|string',
         'price' => 'required|numeric',
         'stock' => 'integer',
         ]);
@@ -34,7 +34,7 @@ class ProductsController extends Controller
     }
 
     // Display the specified resource.
-    public function show(product $product)
+    public function show(Product $product)
     {
         return response() -> json($product);
     }
@@ -46,7 +46,7 @@ class ProductsController extends Controller
 
         $validated = $request -> validate ([
             'name' => 'String|max:255',
-            'description' => 'nullable|text',
+            'description' => 'nullable|string',
             'price' => 'numeric',
             'stock' => 'integer',
         ]);
@@ -60,7 +60,7 @@ class ProductsController extends Controller
     }
 
     // Remove the specified resource from storage.
-    public function destroy(product $product)
+    public function destroy(Product $product)
     {
         $product -> delete();
         return response() -> json(null, 204);
