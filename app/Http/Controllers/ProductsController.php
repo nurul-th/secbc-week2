@@ -53,7 +53,7 @@ class ProductsController extends Controller
         $product = Product::findOrFail($id);
 
         $validated = $request -> validate ([
-            'name' => 'String|max:255',
+            'name' => 'string|max:255',
             'description' => 'nullable|string',
             'price' => 'numeric',
             'stock' => 'integer',
