@@ -39,8 +39,7 @@ The API supports basic CRUD operations and returns JSON responses with proper HT
 
 ## Setup Instructions
 
-### 1. Clone Repository
-```bash
+### Clone Repository
 git clone <your-github-repository-url>
 cd products
 
