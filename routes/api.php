@@ -1,32 +1,21 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\ProductsController; // pastikan nama sama dengan class sebenar
+use App\Http\Controllers\ProductsController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('auth')->group(function () {
-    Route::post('/register', [AuthController::class, 'register']);
-    Route::post('/login', [AuthController::class, 'login']);
-
-    Route::middleware('auth:sanctum')->group(function () {
-        Route::get('/me', [AuthController::class, 'me']);
-        Route::post('/logout', [AuthController::class, 'logout']);
-    });
-});
+// AUTH
+Route::post('/auth/register', [AuthController::class, 'register']);
+Route::post('/auth/login', [AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/products', [ProductsController::class, 'index'])
-        ->middleware('permission:products-view');
+    Route::post('/auth/logout', [AuthController::class, 'logout']);
+    Route::get('/auth/me', [AuthController::class, 'me']);
 
-    Route::get('/products/{id}', [ProductsController::class, 'show'])
-        ->middleware('permission:products-view');
-
-    Route::post('/products', [ProductsController::class, 'store'])
-        ->middleware('permission:products-create');
-
-    Route::put('/products/{id}', [ProductsController::class, 'update'])
-        ->middleware('permission:products-update');
-
-    Route::delete('/products/{id}', [ProductsController::class, 'destroy'])
-        ->middleware('permission:products-delete');
+    // PRODUCTS
+    Route::get('/products', [ProductsController::class, 'index']);
+    Route::get('/products/{id}', [ProductsController::class, 'show']);
+    Route::post('/products', [ProductsController::class, 'store']);
+    Route::put('/products/{id}', [ProductsController::class, 'update']);
+    Route::delete('/products/{id}', [ProductsController::class, 'destroy']);
 });
