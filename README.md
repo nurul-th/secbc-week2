@@ -60,7 +60,7 @@ php artisan key:generate
 php artisan migrate
 
 ### Run Application
-http://products.test
+http://localhost:8000
 
 ## API Testing
 
